@@ -169,6 +169,7 @@
       <li><a href="#trading">Trading System</a></li>
       <li><a href="#quant">Quant Research</a></li>
       <li><a href="#equity">Equity Research</a></li>
+      <li><a href="#quant-projects">Quant Projects</a></li>
       <li><a href="#ml">ML Projects</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -269,6 +270,46 @@
       </div>
       <a href="#equity" class="card-link">View full project →</a>
     </div>
+
+    <div class="card">
+      <div class="card-tag">Derivatives · From Scratch · No QuantLib</div>
+      <div class="card-title">Options Pricing Engine</div>
+      <div class="card-desc">Black-Scholes, CRR binomial tree, and Monte Carlo pricer built from scratch. All Greeks verified against finite-difference. Kalman-based IV surface from live options chain. Delta-hedging P&amp;L simulation validates the vol carry formula.</div>
+      <div class="card-stats">
+        <span class="stat-pill">19/19 tests passing</span>
+        <span class="stat-pill">IV round-trip &lt;1e-6</span>
+        <span class="stat-pill">Asian + Barrier MC</span>
+        <span class="stat-pill">Live IV surface</span>
+      </div>
+      <a href="#options-engine" class="card-link">View full project →</a>
+    </div>
+
+    <div class="card">
+      <div class="card-tag">Statistical Arbitrage · Pairs Trading</div>
+      <div class="card-title">Cointegration &amp; Kalman Filter Pairs</div>
+      <div class="card-desc">End-to-end pairs trading framework: Engle-Granger + Johansen cointegration tests, Kalman filter for dynamic hedge ratio, walk-forward IS/OOS backtest across 190 pairs. IS cointegration breakdown documented across 2021–2026 regime changes.</div>
+      <div class="card-stats">
+        <span class="stat-pill">190 pairs screened</span>
+        <span class="stat-pill">Kalman vs rolling OLS</span>
+        <span class="stat-pill">Honest OOS breakdown</span>
+        <span class="stat-pill">Hurst + half-life</span>
+      </div>
+      <a href="#stat-arb" class="card-link">View full project →</a>
+    </div>
+
+    <div class="card">
+      <div class="card-tag">Credit Risk · Structural + ML</div>
+      <div class="card-title">Credit Default Model</div>
+      <div class="card-desc">Merton structural model (equity = call on firm assets) vs Altman Z-Score vs XGBoost on 46 companies. Merton achieves AUC 0.956 — outperforms ML by using forward-looking market prices. SHAP confirms market cap and equity vol as top predictors.</div>
+      <div class="card-stats">
+        <span class="stat-pill">Merton AUC 0.956</span>
+        <span class="stat-pill">KS stat 0.917</span>
+        <span class="stat-pill">SHAP explainability</span>
+        <span class="stat-pill">28 features</span>
+      </div>
+      <a href="#credit-default" class="card-link">View full project →</a>
+    </div>
+
   </div>
 </section>
 
@@ -600,6 +641,118 @@
     <span class="result-badge">Operational benchmarking</span>
     <br><br>
     <a href="https://github.com/ISHAN217/AHS" class="btn btn-ghost" style="font-size:12px;" target="_blank">GitHub →</a>
+  </div>
+</section>
+
+<hr>
+
+<!-- QUANT PROJECTS -->
+<section id="quant-projects">
+  <div class="section-label">Quantitative Research Projects</div>
+  <h2 class="section-title">Independent Research Portfolio</h2>
+  <p class="section-sub">Three end-to-end systems built from scratch across derivatives pricing, statistical arbitrage, and credit risk — each with rigorous out-of-sample validation.</p>
+
+  <!-- Options Engine -->
+  <div id="options-engine" style="margin-top:3rem;">
+    <div class="section-label" style="margin-bottom:0.75rem;">Project 04 — Derivatives Pricing</div>
+    <h3 style="font-family:var(--display);font-size:1.4rem;font-weight:600;color:var(--text);margin-bottom:0.5rem;">Options Pricing Engine</h3>
+    <p style="color:var(--text2);font-size:14px;margin-bottom:1.5rem;">Black-Scholes, CRR binomial tree, and Monte Carlo pricer built from scratch — no QuantLib dependency. All Greeks verified numerically. Live implied volatility surface from real options chain data.</p>
+
+    <div class="stats-grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));">
+      <div class="stat-cell"><div class="stat-label">Test Suite</div><div class="stat-value">19/19</div><div class="stat-note">All passing</div></div>
+      <div class="stat-cell"><div class="stat-label">IV Round-Trip</div><div class="stat-value">&lt;1e-6</div><div class="stat-note">Brent + Newton</div></div>
+      <div class="stat-cell"><div class="stat-label">Models</div><div class="stat-value">3</div><div class="stat-note">BS · Binomial · MC</div></div>
+      <div class="stat-cell"><div class="stat-label">Exotic Options</div><div class="stat-value">Asian, Barrier</div><div class="stat-note">MC path-dependent</div></div>
+    </div>
+
+    <div class="cards-grid" style="margin-top:1.5rem;">
+      <div class="feature-card">
+        <div class="card-tag">Pricing Models</div>
+        <div class="card-title">Three Independent Pricers</div>
+        <div class="card-desc">Black-Scholes analytical (5 Greeks), CRR binomial tree (European + American early exercise), Monte Carlo with antithetic variates. European prices agree to &lt;0.5%. BS price falls within MC 95% CI on all test cases. American put ≥ European put verified.</div>
+      </div>
+      <div class="feature-card">
+        <div class="card-tag">Implied Volatility</div>
+        <div class="card-title">Brent + Newton-Raphson Solvers</div>
+        <div class="card-desc">Brent's method (bracketed, guaranteed convergence) and Newton-Raphson (faster near ATM, falls back to Brent for deep ITM/OTM). IV round-trip accuracy &lt;1e-6. Live SPY/AAPL IV surface fitted from real options chain — OTM-only filtering for liquidity.</div>
+      </div>
+      <div class="feature-card">
+        <div class="card-tag">Delta Hedging</div>
+        <div class="card-title">P&amp;L Simulation Validates Vol Carry</div>
+        <div class="card-desc">Delta-hedging simulation confirms mean P&amp;L ≈ ½·Γ·S²·(σ²_real − σ²_imp)·T across 1,000 paths. P&amp;L variance decreases with rebalancing frequency. Demonstrates why option sellers are long realized vol.</div>
+      </div>
+    </div>
+    <a href="https://github.com/ISHAN217/options-pricing-engine" class="card-link" target="_blank" style="margin-top:1rem;display:inline-flex;">GitHub Repository →</a>
+  </div>
+
+  <hr style="margin:3rem 0;">
+
+  <!-- Stat Arb -->
+  <div id="stat-arb">
+    <div class="section-label" style="margin-bottom:0.75rem;">Project 05 — Statistical Arbitrage</div>
+    <h3 style="font-family:var(--display);font-size:1.4rem;font-weight:600;color:var(--text);margin-bottom:0.5rem;">Cointegration &amp; Kalman Filter Pairs Trading</h3>
+    <p style="color:var(--text2);font-size:14px;margin-bottom:1.5rem;">Systematic pairs trading framework: Engle-Granger + Johansen dual cointegration testing, Kalman filter for dynamic hedge ratio, walk-forward backtesting across 190 pairs. The OOS failure of IS-cointegrated pairs is the central finding — not a limitation.</p>
+
+    <div class="stats-grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));">
+      <div class="stat-cell"><div class="stat-label">Pairs Screened</div><div class="stat-value">190</div><div class="stat-note">5 sectors, IS only</div></div>
+      <div class="stat-cell"><div class="stat-label">IS Period</div><div class="stat-value">2015–2020</div><div class="stat-note">Cointegration fitting</div></div>
+      <div class="stat-cell"><div class="stat-label">OOS Period</div><div class="stat-value">2021–2026</div><div class="stat-note">Honest validation</div></div>
+      <div class="stat-cell"><div class="stat-label">Hedge Ratio</div><div class="stat-value">Kalman</div><div class="stat-note">No window choice</div></div>
+    </div>
+
+    <div class="cards-grid" style="margin-top:1.5rem;">
+      <div class="feature-card">
+        <div class="card-tag">Cointegration</div>
+        <div class="card-title">Dual-Test Screening Framework</div>
+        <div class="card-desc">Engle-Granger tests OLS residual stationarity (direction-dependent). Johansen tests cointegration rank jointly (direction-independent). Pairs confirmed by both are more robust — the only Johansen-confirmed pair (EOG/WFC) had near-zero OOS loss vs deep drawdowns for non-confirmed pairs.</div>
+      </div>
+      <div class="feature-card">
+        <div class="card-tag">Kalman Filter</div>
+        <div class="card-title">Dynamic Hedge Ratio vs Rolling OLS</div>
+        <div class="card-desc">Two-state Kalman filter estimates α and β as latent states evolving over time. No arbitrary window choice. δ parameter controls adaptation speed (1e-5 → near-static, 1e-3 → fast). Smoother than rolling OLS and avoids window-end artifacts at structural breaks.</div>
+      </div>
+      <div class="feature-card">
+        <div class="card-tag">Key Finding</div>
+        <div class="card-title">IS Cointegration Failed OOS — Why</div>
+        <div class="card-desc">All 8 IS-cointegrated pairs had negative OOS Sharpe. KO/PEP broke during 2022 inflation (different pricing power). SLB pairs broke during energy transition. Confirms: statistical tests are backward-looking. Live pairs trading requires quarterly re-screening and regime detection overlay.</div>
+      </div>
+    </div>
+    <a href="https://github.com/ISHAN217/stat-arb-pairs-trading" class="card-link" target="_blank" style="margin-top:1rem;display:inline-flex;">GitHub Repository →</a>
+  </div>
+
+  <hr style="margin:3rem 0;">
+
+  <!-- Credit Default -->
+  <div id="credit-default">
+    <div class="section-label" style="margin-bottom:0.75rem;">Project 06 — Credit Risk</div>
+    <h3 style="font-family:var(--display);font-size:1.4rem;font-weight:600;color:var(--text);margin-bottom:0.5rem;">Credit Default Model — Merton vs Altman vs XGBoost</h3>
+    <p style="color:var(--text2);font-size:14px;margin-bottom:1.5rem;">Structural, score-based, and ML approaches to credit default prediction on 46 companies (33 healthy, 13 distressed). Merton model outperforms XGBoost because market prices are forward-looking — the central insight of structural credit models.</p>
+
+    <div class="stats-grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));">
+      <div class="stat-cell"><div class="stat-label">Merton AUC</div><div class="stat-value">0.956</div><div class="stat-note">Best model</div></div>
+      <div class="stat-cell"><div class="stat-label">KS Statistic</div><div class="stat-value">0.917</div><div class="stat-note">Basel II metric</div></div>
+      <div class="stat-cell"><div class="stat-label">Altman AUC</div><div class="stat-value">0.892</div><div class="stat-note">Z-Score baseline</div></div>
+      <div class="stat-cell"><div class="stat-label">Features</div><div class="stat-value">28</div><div class="stat-note">Financial ratios</div></div>
+    </div>
+
+    <div class="cards-grid" style="margin-top:1.5rem;">
+      <div class="feature-card">
+        <div class="card-tag">Merton Structural Model</div>
+        <div class="card-title">Equity as Call Option on Firm Assets</div>
+        <div class="card-desc">Implements Merton (1974): solve two-equation system (BS call + Ito's lemma) via Newton-Raphson to back out implied asset value V and asset vol σ_V from equity price + debt. Distance-to-Default DD = (ln(V/K) + drift·T) / (σ_V·√T). PD = N(−DD).</div>
+      </div>
+      <div class="feature-card">
+        <div class="card-tag">Why Merton Beats ML</div>
+        <div class="card-title">Market Prices Are Forward-Looking</div>
+        <div class="card-desc">Equity volatility and market cap embed market expectations about future distress before accounting statements reflect it. Altman uses backward-looking ratios. XGBoost overfits at N=46 (CV-AUC=1.0 vs test AUC=0.78). At scale, XGBoost would win — but structural models dominate on small samples.</div>
+      </div>
+      <div class="feature-card">
+        <div class="card-tag">SHAP Analysis</div>
+        <div class="card-title">log(Market Cap) and Equity Vol Drive Predictions</div>
+        <div class="card-desc">SHAP (not XGBoost gain) ranks log_market_cap #1 and equity_vol_annual #2 — consistent with Merton intuition. XGBoost gain incorrectly ranks roa #1 due to high-cardinality bias. Altman Z-score fails for utilities: capital-intensive regulated firms look "distressed" by design.</div>
+      </div>
+    </div>
+    <a href="https://github.com/ISHAN217/credit-default-model" class="card-link" target="_blank" style="margin-top:1rem;display:inline-flex;">GitHub Repository →</a>
   </div>
 </section>
 

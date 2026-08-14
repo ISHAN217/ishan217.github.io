@@ -180,7 +180,7 @@
       <div class="section-label">Portfolio</div>
       <h1 class="hero-name">Ishan<br><span>Bhardwaj</span></h1>
       <p class="hero-tagline">Quantitative Analyst &nbsp;·&nbsp; <span style="color:var(--teal);font-weight:600;">Top 10% CME Competition</span> &nbsp;·&nbsp; Systematic Trading &nbsp;·&nbsp; Financial ML</p>
-      <p class="hero-bio">M.S. Financial Mathematics, University of Minnesota. I build production-grade trading systems from signal research through live broker execution — and I document every failed experiment as rigorously as the ones that worked. Currently contracted as a Quantitative Finance Expert via Mercor, evaluating AI model performance on derivatives pricing, risk modeling, and systematic trading. <strong>Placed Top 10%</strong> in the CME Institute Competition (June 2026) with a 5-strategy automated futures system that passed a 38-check audit suite. OOS Sharpe: 4.85. Profitable in every held-out year.</p>
+      <p class="hero-bio">M.S. Financial Mathematics, University of Minnesota. I build production-grade trading systems from signal research through live broker execution — and I document every failed experiment as rigorously as the ones that worked. Currently contracted as a Quantitative Finance Expert via Mercor, evaluating AI model performance on derivatives pricing, risk modeling, and systematic trading. <strong>Placed Top 10%</strong> in the CME Institute Competition (June 2026) with a 5-strategy automated futures system that passed a 38-check audit suite. OOS Sharpe: 2.23 (corrected for discrete sizing, commissions, risk-free rate, and true equity-curve returns). Profitable in every held-out year.</p>
       <div class="hero-links">
         <a href="#trading" class="btn btn-primary">CME Trading System</a>
         <a href="https://github.com/ISHAN217" class="btn btn-ghost" target="_blank">GitHub</a>
@@ -244,7 +244,7 @@
       <div class="card-desc">5-strategy automated system for ES/NQ and CL futures. Full pipeline from IBKR data feed to live signal generation. 8.1 years backtested, 4-year held-out OOS.</div>
       <div class="card-stats">
         <span class="stat-pill" style="background:rgba(245,158,11,0.15);color:#f59e0b;">🏆 Top 10%</span>
-        <span class="stat-pill">Sharpe 4.85 OOS</span>
+        <span class="stat-pill">Sharpe 2.23 OOS</span>
         <span class="stat-pill">5/5 profitable years</span>
         <span class="stat-pill">Live IBKR</span>
         <span class="stat-pill">100% fill validity</span>
@@ -325,35 +325,35 @@
 
   <div class="disclaimer">
     <div class="disclaimer-icon">⚠</div>
-    <p><strong>Important:</strong> These are backtested simulation results on a $25,000 competition account — not live trading returns. Risk sizing of 2–5% per trade is aggressive and appropriate for a competition context. The OOS period (2022–2026) was never used in strategy design or parameter selection.</p>
+    <p><strong>Important:</strong> These are backtested simulation results on a $25,000 competition account — not live trading returns. All metrics are fully corrected: discrete contract sizing, round-turn commissions (MES $1.24, MCL $1.60), true percentage returns on current equity, risk-free rate (Rf=4.5%), all trading days included (not just signal days), and correlated signal overlap removed. The OOS period (2022–2026) was never used in strategy design or parameter selection.</p>
   </div>
 
   <div class="section-label">Key Results</div>
   <div class="stats-grid">
     <div class="stat-cell">
       <div class="stat-label">OOS Sharpe</div>
-      <div class="stat-value">4.85</div>
-      <div class="stat-note">2022–2026</div>
+      <div class="stat-value">2.23</div>
+      <div class="stat-note">2022–2026, corrected</div>
     </div>
     <div class="stat-cell">
-      <div class="stat-label">IS / OOS Ratio</div>
-      <div class="stat-value">1.34×</div>
-      <div class="stat-note">No decay — opposite of overfitting</div>
+      <div class="stat-label">Sortino (Rf=4.5%)</div>
+      <div class="stat-value">4.33</div>
+      <div class="stat-note">Downside-risk adjusted</div>
     </div>
     <div class="stat-cell">
-      <div class="stat-label">Annual Return</div>
-      <div class="stat-value">+188%</div>
-      <div class="stat-note">+$47,170 on $25k</div>
+      <div class="stat-label">Annual P&amp;L</div>
+      <div class="stat-value">$45,939</div>
+      <div class="stat-note">After commissions</div>
     </div>
     <div class="stat-cell">
       <div class="stat-label">Max Drawdown</div>
-      <div class="stat-value">-29.5%</div>
-      <div class="stat-note">-$7,379</div>
+      <div class="stat-value">-9.2%</div>
+      <div class="stat-note">-$5,633</div>
     </div>
     <div class="stat-cell">
       <div class="stat-label">Win Weeks</div>
-      <div class="stat-value">64%</div>
-      <div class="stat-note">253 of 397 active weeks</div>
+      <div class="stat-value">66.5%</div>
+      <div class="stat-note">All weeks incl. zero-signal</div>
     </div>
     <div class="stat-cell">
       <div class="stat-label">OOS Years Profitable</div>
@@ -388,37 +388,37 @@
         <tr>
           <td>Asymmetric ORB</td>
           <td>ES + NQ</td>
-          <td>18</td>
-          <td class="td-highlight">59.5%</td>
-          <td class="td-highlight">3.55</td>
+          <td>16</td>
+          <td class="td-highlight">58.2%</td>
+          <td class="td-highlight">0.58</td>
         </tr>
         <tr>
           <td>MTF Scalp</td>
           <td>ES</td>
-          <td>127</td>
-          <td class="td-highlight">44.8%</td>
-          <td class="td-highlight">2.03</td>
+          <td>135</td>
+          <td class="td-highlight">45.0%</td>
+          <td class="td-highlight">0.74</td>
         </tr>
         <tr>
           <td>Double Test at Level</td>
           <td>ES</td>
-          <td>65</td>
-          <td class="td-highlight">39.9%</td>
-          <td class="td-highlight">4.65</td>
+          <td>71</td>
+          <td class="td-highlight">40.0%</td>
+          <td class="td-highlight">1.83</td>
         </tr>
         <tr>
           <td>Gap + ORB Alignment</td>
           <td>ES + NQ</td>
-          <td>33</td>
-          <td class="td-highlight">54.3%</td>
-          <td class="td-highlight">2.77</td>
+          <td>23</td>
+          <td class="td-highlight">53.1%</td>
+          <td class="td-highlight">0.31</td>
         </tr>
         <tr>
           <td>CL Prior-Week H/L</td>
           <td>Crude Oil</td>
-          <td>62</td>
-          <td class="td-highlight">71.7%</td>
-          <td class="td-highlight">7.77</td>
+          <td>63</td>
+          <td class="td-highlight">72.2%</td>
+          <td class="td-highlight">2.94</td>
         </tr>
       </tbody>
     </table>
@@ -432,14 +432,14 @@
       <div class="feature-desc">Early backtests showed a <strong>79.9% win rate</strong> — an audit revealed 70–80% of entries were unfillable in practice. Switching to market-order entry corrected this to an honest <strong>53–60%</strong>. This kind of rigour is rare and interviewers notice it.</div>
     </div>
     <div class="feature-card">
-      <div class="feature-num">02 / IS/OOS Discipline</div>
-      <div class="feature-title">OOS Sharpe exceeds IS by 1.34×</div>
-      <div class="feature-desc">2018–2021 was used for in-sample design only. 2022–2026 was held out completely and never touched during parameter selection. OOS outperforming IS is the <strong>opposite of overfitting</strong>.</div>
+      <div class="feature-num">02 / Corrected Methodology</div>
+      <div class="feature-title">8 corrections applied to Sharpe calculation</div>
+      <div class="feature-desc">Published metrics include all trading days (not just signal days), discrete MES/MCL contract sizing, round-turn commissions, true % returns on current equity, risk-free rate subtraction (Rf=4.5%), correlated overlap removal, and selection bias deflation (44 strategies tested). <strong>Bootstrap 95% CI: [1.53, 2.89].</strong></div>
     </div>
     <div class="feature-card">
       <div class="feature-num">03 / Honest Research Process</div>
-      <div class="feature-title">15 signals explored, 11 rejected</div>
-      <div class="feature-desc">Every failed experiment is documented with honest OOS results and reasons for rejection. Signals with negative OOS Sharpe (e.g. Opening Drive: <strong>−19.94</strong>) were cut regardless of IS performance.</div>
+      <div class="feature-title">44 strategies tested, 39 rejected</div>
+      <div class="feature-desc">Every failed experiment is documented with honest OOS results and reasons for rejection. Signals with negative OOS Sharpe (e.g. Opening Drive: <strong>−19.94</strong>) were cut regardless of IS performance. Selection bias deflation (N=44) applied to final Sharpe.</div>
     </div>
     <div class="feature-card">
       <div class="feature-num">04 / Live Deployment</div>
@@ -470,7 +470,7 @@
     <span class="tech-tag">Custom backtesting engine</span>
     <span class="tech-tag">2.8M+ 1-min bars (ES, NQ, CL)</span>
   </div>
-  <p style="font-size:13px; color:var(--text2); margin-top:1rem;">Automated test suite: <strong style="color:var(--teal)">38/39 checks pass</strong> — trade count, fill validity, P&amp;L cross-check (trade-sum == daily-sum to the cent), IS/OOS ratio ≥ 0.70, all OOS years profitable.</p>
+  <p style="font-size:13px; color:var(--text2); margin-top:1rem;">Automated test suite: <strong style="color:var(--teal)">38/39 checks pass</strong> — trade count, fill validity, P&amp;L cross-check (trade-sum == daily-sum to the cent), all OOS years profitable. Profit factor: 2.11. Total commissions over 5yr OOS: $37,126.</p>
   <a href="https://github.com/ISHAN217/CME-Futures-Trading-System" class="btn btn-ghost" style="margin-top:1.25rem; font-size:12px;" target="_blank">View on GitHub →</a>
 </section>
 

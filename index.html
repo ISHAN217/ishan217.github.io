@@ -776,8 +776,14 @@
 <section id="model-lifecycle">
   <div class="section-label">Project 07 — Model Risk Management</div>
   <h2 class="section-title">Model Lifecycle OS</h2>
-  <p class="section-sub">A governed platform for bank model risk management under SR 11-7 and OCC 2011-12. The system treats evidence as the source of truth across development, independent validation, approval, production, and ongoing monitoring.</p>
+  <p class="section-sub">A full-stack governance platform for bank model risk management under SR 11-7 and OCC 2011-12. It turns policy into enforceable software controls across model registration, development, independent validation, approval, production, and ongoing monitoring.</p>
 
+  <div class="disclaimer">
+    <div class="disclaimer-icon">◆</div>
+    <p><strong>Design principle:</strong> evidence is the source of truth. A model cannot advance because a status field was manually changed; lifecycle transitions depend on documented datasets, variables, assumptions, test executions, findings, remediation, and approvals. Development and validation responsibilities remain explicitly separated.</p>
+  </div>
+
+  <div class="section-label">Key Results</div>
   <div class="stats-grid">
     <div class="stat-cell">
       <div class="stat-label">Lifecycle</div>
@@ -799,29 +805,262 @@
       <div class="stat-value">5 roles</div>
       <div class="stat-note">JWT-based RBAC</div>
     </div>
+    <div class="stat-cell">
+      <div class="stat-label">REST API</div>
+      <div class="stat-value">30+ endpoints</div>
+      <div class="stat-note">Documented with OpenAPI</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">Permissions</div>
+      <div class="stat-value">7 controls</div>
+      <div class="stat-note">Role-enforced actions</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">Demo Portfolio</div>
+      <div class="stat-value">3 models</div>
+      <div class="stat-note">PD, LGD, and operational risk</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">Regulatory Export</div>
+      <div class="stat-value">PDF + Excel</div>
+      <div class="stat-note">Reports and evidence packages</div>
+    </div>
   </div>
 
+  <div class="section-label">The Governance Problem</div>
+  <div class="research-card">
+    <div class="research-header">
+      <div class="research-title">Model risk is a lineage and control problem</div>
+      <span class="research-ticker">SR 11-7 / OCC 2011-12</span>
+    </div>
+    <div class="research-desc">Model inventories, development documents, validation tests, findings, approvals, and monitoring evidence are often fragmented across spreadsheets, documents, tickets, and email. That makes it difficult to prove who approved a model, which evidence supported the decision, whether validation was independent, and whether an open finding should have blocked production use.</div>
+    <div class="research-meta">
+      <div class="meta-item">SYSTEM RESPONSE &nbsp;<span>One governed evidence graph</span></div>
+      <div class="meta-item">CONTROL MODEL &nbsp;<span>State-machine gates</span></div>
+      <div class="meta-item">ACCOUNTABILITY &nbsp;<span>Role-separated workflows</span></div>
+      <div class="meta-item">OUTPUT &nbsp;<span>Audit-ready packages</span></div>
+    </div>
+  </div>
+
+  <div class="section-label">Lifecycle Architecture</div>
   <div class="features-grid">
     <div class="feature-card">
-      <div class="feature-num">01 / Evidence Store</div>
-      <div class="feature-title">Lineage is the source of truth</div>
-      <div class="feature-desc">SQLAlchemy models connect each model version to datasets, variables, assumptions, tests, findings, and approvals. Audit hooks preserve a traceable chain from inventory record to individual test execution.</div>
+      <div class="feature-num">01 / Inventory &amp; Development</div>
+      <div class="feature-title">Register, tier, and document the model</div>
+      <div class="feature-desc">The registry captures ownership, model type, purpose, materiality, and risk tier. Each version links its datasets, variables, coefficients, assumptions, and development evidence before it can be handed to independent validation.</div>
     </div>
     <div class="feature-card">
-      <div class="feature-num">02 / Lifecycle Governance</div>
-      <div class="feature-title">Controls enforced in software</div>
-      <div class="feature-desc">An 11-stage state machine uses transition guards, evidence gates, and development/validation separation. The findings engine manages the complete MRA/MRIA path from opening through remediation, closure, and reopening.</div>
+      <div class="feature-num">02 / Independent Validation</div>
+      <div class="feature-title">Test evidence stays separate from development</div>
+      <div class="feature-desc">Validators execute and record tests, review assumptions and data fitness, create findings, and assemble a validation conclusion. Domain separation prevents the development role from approving its own evidence.</div>
     </div>
     <div class="feature-card">
-      <div class="feature-num">03 / Validation Assistance</div>
-      <div class="feature-title">Rules-based MRM automation</div>
-      <div class="feature-desc">The platform generates validation plans, suggests findings from test evidence, and drafts structured seven-section validation reports while keeping the underlying evidence visible and reviewable.</div>
+      <div class="feature-num">03 / Decision &amp; Findings</div>
+      <div class="feature-title">Approval depends on resolved risk</div>
+      <div class="feature-desc">The findings engine tracks severity, MRA/MRIA classification, ownership, aging, remediation, closure, and reopening. Approval records remain connected to the exact model version and evidence reviewed.</div>
     </div>
     <div class="feature-card">
-      <div class="feature-num">04 / Delivery &amp; Reporting</div>
-      <div class="feature-title">Dashboard, API, and regulator-ready exports</div>
-      <div class="feature-desc">A FastAPI service and dark-theme dashboard expose model inventory, workflows, tests, findings, and approvals. PDF validation reports and multi-sheet Excel evidence packages support review and audit workflows.</div>
+      <div class="feature-num">04 / Production &amp; Monitoring</div>
+      <div class="feature-title">Governance continues after approval</div>
+      <div class="feature-desc">The 11-stage state machine carries the model into production and ongoing monitoring while retaining prior versions, test history, findings, approvals, and the audit trail needed to reconstruct every decision.</div>
     </div>
+  </div>
+
+  <div class="section-label">Evidence Lineage</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Layer</th>
+          <th>Evidence Captured</th>
+          <th>Governance Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Model Registry</td>
+          <td>Owner, purpose, model type, materiality, risk tier</td>
+          <td>Complete enterprise inventory and accountability</td>
+        </tr>
+        <tr>
+          <td>Model Version</td>
+          <td>Datasets, variables, coefficients, assumptions</td>
+          <td>Reproducible specification for the reviewed version</td>
+        </tr>
+        <tr>
+          <td>Validation</td>
+          <td>Test definitions, executions, results, and coverage</td>
+          <td>Trace conclusions back to individual test evidence</td>
+        </tr>
+        <tr>
+          <td>Findings</td>
+          <td>Severity, MRA/MRIA class, aging, remediation, closure</td>
+          <td>Prevent unresolved risk from disappearing between teams</td>
+        </tr>
+        <tr>
+          <td>Decision</td>
+          <td>Approver, decision, timestamp, and supporting evidence</td>
+          <td>Reconstruct who authorized use and on what basis</td>
+        </tr>
+        <tr>
+          <td>Audit &amp; Export</td>
+          <td>Immutable hooks, PDF report, multi-sheet Excel package</td>
+          <td>Deliver regulator- and audit-ready documentation</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-label">What Makes It Stand Out</div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-num">01 / Evidence Gates</div>
+      <div class="feature-title">Transitions require proof</div>
+      <div class="feature-desc">Lifecycle guards check completeness and readiness before allowing a model to move forward. Governance requirements are executable controls rather than optional checklist text.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">02 / Domain Separation</div>
+      <div class="feature-title">Development cannot validate itself</div>
+      <div class="feature-desc">Five RBAC roles and seven permissions separate model development, validation, MRM oversight, administration, and read-only review.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">03 / Finding Lifecycle</div>
+      <div class="feature-title">Issues remain governed through closure</div>
+      <div class="feature-desc">Findings move from open to remediation and closure, with explicit support for reopening. Severity and aging remain visible throughout the workflow.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">04 / Completeness Engine</div>
+      <div class="feature-title">Readiness is measurable</div>
+      <div class="feature-desc">Registry and workflow checks surface missing datasets, assumptions, tests, findings responses, or approvals before a handoff or lifecycle decision.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">05 / Auditability</div>
+      <div class="feature-title">Every decision retains context</div>
+      <div class="feature-desc">Database audit hooks, foreign-key enforcement, and model-version lineage preserve the relationship between evidence, actions, and final decisions.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">06 / Operational Delivery</div>
+      <div class="feature-title">One platform, multiple review surfaces</div>
+      <div class="feature-desc">The same governed data powers the dashboard, REST API, OpenAPI documentation, PDF validation report, and Excel evidence workbook.</div>
+    </div>
+  </div>
+
+  <div class="section-label">Rules-Based Validation Assistance</div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-num">Plan Generator</div>
+      <div class="feature-title">Evidence-aware validation scope</div>
+      <div class="feature-desc">Builds a structured validation plan from development evidence, regulatory purpose, materiality, and the risks visible in the registered model.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">Finding Suggester</div>
+      <div class="feature-title">Deterministic exception detection</div>
+      <div class="feature-desc">Flags potential concerns such as failed tests, missing coverage, VIF issues, and coefficient sign reversals while leaving disposition with the validator.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">Report Drafter</div>
+      <div class="feature-title">Seven-section validation narrative</div>
+      <div class="feature-desc">Drafts an executive summary through conclusion from stored evidence. The generated narrative remains traceable to tests, findings, and approvals rather than becoming a separate source of truth.</div>
+    </div>
+  </div>
+
+  <div class="section-label">API &amp; Reporting Surface</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th>Representative Operations</th>
+          <th>Delivery</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Inventory</td>
+          <td>List models, inspect versions, summarize registry risk</td>
+          <td>Dashboard + REST</td>
+        </tr>
+        <tr>
+          <td>Evidence</td>
+          <td>Datasets, variables, assumptions, tests, findings, approvals</td>
+          <td>30+ FastAPI endpoints</td>
+        </tr>
+        <tr>
+          <td>Workflow</td>
+          <td>Readiness status, lifecycle transitions, guided work steps</td>
+          <td>Authenticated actions</td>
+        </tr>
+        <tr>
+          <td>Validation Assistance</td>
+          <td>Plans, suggested findings, seven-section report drafts</td>
+          <td>Rules-based API services</td>
+        </tr>
+        <tr>
+          <td>Regulatory Package</td>
+          <td>Five-page validation report and evidence workbook</td>
+          <td>PDF + multi-sheet Excel</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-label">Demonstration Portfolio</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Model ID</th>
+          <th>Model</th>
+          <th>Method</th>
+          <th>Materiality</th>
+          <th>Lifecycle State</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CRD-PD-001</td>
+          <td>Commercial PD Model</td>
+          <td>Logistic Regression</td>
+          <td class="td-highlight">Critical</td>
+          <td>Production</td>
+        </tr>
+        <tr>
+          <td>CRD-LGD-001</td>
+          <td>Retail LGD Model</td>
+          <td>Tobit Regression</td>
+          <td>High</td>
+          <td>Validation</td>
+        </tr>
+        <tr>
+          <td>OPR-001</td>
+          <td>Op Risk Loss Frequency</td>
+          <td>Poisson-LDA</td>
+          <td>Medium</td>
+          <td>Development</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-label">Automated Verification</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Test Layer</th>
+          <th>Coverage</th>
+          <th>Tests</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Schema</td><td>Entities, relationships, constraints, and audit behavior</td><td class="td-highlight">12</td></tr>
+        <tr><td>Lifecycle</td><td>State transitions, guards, and evidence gates</td><td class="td-highlight">12</td></tr>
+        <tr><td>Findings</td><td>Open, remediation, closure, reopening, and aging</td><td class="td-highlight">18</td></tr>
+        <tr><td>Validation Assistance</td><td>Plans, suggestions, and report drafting</td><td class="td-highlight">21</td></tr>
+        <tr><td>API</td><td>Authentication, permissions, CRUD, workflows, and exports</td><td class="td-highlight">26</td></tr>
+        <tr><td>Total</td><td>Five independently exercised system layers</td><td class="td-highlight"><strong>89</strong></td></tr>
+      </tbody>
+    </table>
   </div>
 
   <div class="section-label">Technology</div>
@@ -837,7 +1076,7 @@
     <span class="tech-tag">fpdf2</span>
     <span class="tech-tag">openpyxl</span>
   </div>
-  <a href="https://github.com/ISHAN217/model-lifecycle-os" class="btn btn-ghost" style="margin-top:1.25rem; font-size:12px;" target="_blank">View on GitHub →</a>
+  <a href="https://github.com/ISHAN217/model-lifecycle-os" class="btn btn-primary" style="margin-top:1.25rem; font-size:12px;" target="_blank">Explore the Full Repository →</a>
 </section>
 
 <hr>

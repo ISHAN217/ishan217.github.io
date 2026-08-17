@@ -236,7 +236,7 @@
 <section id="projects">
   <div class="section-label">Featured Work</div>
   <h2 class="section-title">Projects</h2>
-  <p class="section-sub">End-to-end systems across systematic trading, ML forecasting, and investment research.</p>
+  <p class="section-sub">End-to-end systems across systematic trading, model governance, ML forecasting, and investment research.</p>
   <div class="cards-grid">
     <div class="card featured">
       <div class="card-tag">🏆 <strong>Top 10%</strong> &nbsp;·&nbsp; CME Institute Competition · June 2026</div>
@@ -250,6 +250,18 @@
         <span class="stat-pill">100% fill validity</span>
       </div>
       <a href="#trading" class="card-link">View full project →</a>
+    </div>
+    <div class="card featured">
+      <div class="card-tag">Model Risk Management · SR 11-7 / OCC 2011-12</div>
+      <div class="card-title">Model Lifecycle OS</div>
+      <div class="card-desc">Governed platform for bank model risk management, spanning development, independent validation, approval, production, and monitoring. Evidence lineage, lifecycle gates, findings management, and regulatory-grade exports are built into one system.</div>
+      <div class="card-stats">
+        <span class="stat-pill">11 lifecycle stages</span>
+        <span class="stat-pill">89 tests</span>
+        <span class="stat-pill">30+ API endpoints</span>
+        <span class="stat-pill">5 RBAC roles</span>
+      </div>
+      <a href="#model-lifecycle" class="card-link">View full project →</a>
     </div>
     <div class="card">
       <div class="card-tag">Directed Research · May 2026</div>
@@ -366,9 +378,9 @@
       <div class="stat-note">Market orders, audited</div>
     </div>
     <div class="stat-cell">
-      <div class="stat-label">Backtest Period</div>
-      <div class="stat-value">8.1 yrs</div>
-      <div class="stat-note">April 2018 – June 2026</div>
+      <div class="stat-label">Competition Result</div>
+      <div class="stat-value">Top 10%</div>
+      <div class="stat-note">CME Institute, June 2026</div>
     </div>
   </div>
 
@@ -756,6 +768,76 @@
     </div>
     <a href="https://github.com/ISHAN217/credit-default-model" class="card-link" target="_blank" style="margin-top:1rem;display:inline-flex;">GitHub Repository →</a>
   </div>
+</section>
+
+<hr>
+
+<!-- MODEL LIFECYCLE OS -->
+<section id="model-lifecycle">
+  <div class="section-label">Project 07 — Model Risk Management</div>
+  <h2 class="section-title">Model Lifecycle OS</h2>
+  <p class="section-sub">A governed platform for bank model risk management under SR 11-7 and OCC 2011-12. The system treats evidence as the source of truth across development, independent validation, approval, production, and ongoing monitoring.</p>
+
+  <div class="stats-grid">
+    <div class="stat-cell">
+      <div class="stat-label">Lifecycle</div>
+      <div class="stat-value">11 stages</div>
+      <div class="stat-note">Evidence-gated transitions</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">Test Suite</div>
+      <div class="stat-value">89 tests</div>
+      <div class="stat-note">Across five system layers</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">Evidence Model</div>
+      <div class="stat-value">14 entities</div>
+      <div class="stat-note">Full lineage and audit hooks</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">Access Control</div>
+      <div class="stat-value">5 roles</div>
+      <div class="stat-note">JWT-based RBAC</div>
+    </div>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-num">01 / Evidence Store</div>
+      <div class="feature-title">Lineage is the source of truth</div>
+      <div class="feature-desc">SQLAlchemy models connect each model version to datasets, variables, assumptions, tests, findings, and approvals. Audit hooks preserve a traceable chain from inventory record to individual test execution.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">02 / Lifecycle Governance</div>
+      <div class="feature-title">Controls enforced in software</div>
+      <div class="feature-desc">An 11-stage state machine uses transition guards, evidence gates, and development/validation separation. The findings engine manages the complete MRA/MRIA path from opening through remediation, closure, and reopening.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">03 / Validation Assistance</div>
+      <div class="feature-title">Rules-based MRM automation</div>
+      <div class="feature-desc">The platform generates validation plans, suggests findings from test evidence, and drafts structured seven-section validation reports while keeping the underlying evidence visible and reviewable.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">04 / Delivery &amp; Reporting</div>
+      <div class="feature-title">Dashboard, API, and regulator-ready exports</div>
+      <div class="feature-desc">A FastAPI service and dark-theme dashboard expose model inventory, workflows, tests, findings, and approvals. PDF validation reports and multi-sheet Excel evidence packages support review and audit workflows.</div>
+    </div>
+  </div>
+
+  <div class="section-label">Technology</div>
+  <div class="tech-row">
+    <span class="tech-tag">Python 3.12</span>
+    <span class="tech-tag">FastAPI</span>
+    <span class="tech-tag">SQLAlchemy</span>
+    <span class="tech-tag">Pydantic</span>
+    <span class="tech-tag">SQLite</span>
+    <span class="tech-tag">JWT / bcrypt</span>
+    <span class="tech-tag">Vanilla JavaScript</span>
+    <span class="tech-tag">pytest</span>
+    <span class="tech-tag">fpdf2</span>
+    <span class="tech-tag">openpyxl</span>
+  </div>
+  <a href="https://github.com/ISHAN217/model-lifecycle-os" class="btn btn-ghost" style="margin-top:1.25rem; font-size:12px;" target="_blank">View on GitHub →</a>
 </section>
 
 <hr>
